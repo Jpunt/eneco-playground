@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { cards, Card } from "./data";
+import { Card } from "./data";
 import ProductCard from "./ProductCard";
 import StoryCard from "./StoryCard";
 
@@ -15,14 +15,18 @@ const StyledStoryCard = styled(StoryCard)`
   grid-column: span 2;
 `;
 
-export default function GridC() {
+interface Props {
+  cards: Card[];
+}
+
+export default function GridC(props: Props) {
   // Haal de volgende card een stap terug, als er een story in
   // de derde kolom zit en de volgende een product is:
   let used = 0;
-  const orderedCards = cards.reduce((result, card, index) => {
+  const orderedCards = props.cards.reduce((result, card, index) => {
     const columns = card.type === "story" ? 2 : 1;
     const isThird = (used + 1) % 3 === 0;
-    const nextCard = cards[index + 1];
+    const nextCard = props.cards[index + 1];
 
     if (isThird && card.type === "story" && nextCard?.type === "product") {
       used += columns;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { cards } from "./data";
+import { Card } from "./data";
 import ProductCard from "./ProductCard";
 import StoryCard from "./StoryCard";
 
@@ -17,10 +17,14 @@ const StyledStoryCard = styled(StoryCard)`
 
 const StyledProductCard = styled(ProductCard)``;
 
-export default function GridA() {
+interface Props {
+  cards: Card[];
+}
+
+export default function GridA(props: Props) {
   return (
     <Container>
-      {cards.map((card) => {
+      {props.cards.map((card) => {
         switch (card.type) {
           case "product":
             return <StyledProductCard key={card.id} card={card} />;

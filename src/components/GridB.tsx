@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { cards, Card } from "./data";
+import { Card } from "./data";
 import ProductCard from "./ProductCard";
 import StoryCard from "./StoryCard";
 
@@ -17,9 +17,13 @@ const StyledStoryCard = styled(StoryCard)`
 
 type CardWithColumns = Card & { columns: number };
 
-export default function GridB() {
+interface Props {
+  cards: Card[];
+}
+
+export default function GridB(props: Props) {
   let used = 0;
-  const cardsWithColumns: CardWithColumns[] = cards.map((card) => {
+  const cardsWithColumns: CardWithColumns[] = props.cards.map((card) => {
     switch (card.type) {
       case "product": {
         // Products zijn altijd 1 kolom

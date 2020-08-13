@@ -1,7 +1,7 @@
 export enum Tag {
-  energieOpwekken,
-  inzichtEnBesparen,
-  slimVerwarmen,
+  inzichtEnBesparen = "Inzicht en besparen",
+  slimVerwarmen = "Slim verwarmen",
+  energieOpwekken = "Energie opwekken",
 }
 
 export interface Story {
@@ -44,7 +44,7 @@ export const cards: Card[] = [
     type: "story",
     id: 2,
     title: "Altijd zeker van een veilige, werkende ketel",
-    background: "linear-gradient(#6aa1bf, #80aac2)",
+    background: "linear-gradient(#c2e9ff, #79bfe6)",
     tags: [Tag.slimVerwarmen],
   },
   {
@@ -111,13 +111,6 @@ export const cards: Card[] = [
     tags: [Tag.inzichtEnBesparen],
   },
   {
-    type: "story",
-    id: 11,
-    title: "Extra blij met zonnig weer",
-    background: "linear-gradient(#5f742c, #6b7930)",
-    tags: [Tag.inzichtEnBesparen],
-  },
-  {
     type: "product",
     id: 12,
     title: "Slimme meter",
@@ -131,6 +124,13 @@ export const cards: Card[] = [
     title: "Mijn Eneco",
     subTitle: "Regel je zaken online",
     background: "linear-gradient(#e7e5f5, #c2c6e5)",
+    tags: [Tag.inzichtEnBesparen],
+  },
+  {
+    type: "story",
+    id: 11,
+    title: "Extra blij met zonnig weer",
+    background: "linear-gradient(#e7ffad, #90b141)",
     tags: [Tag.inzichtEnBesparen],
   },
   {
