@@ -10,22 +10,27 @@ const Container = styled.div`
   font-family: Helvetica, sans-serif;
   margin: 100px auto;
   width: 800px;
+
+  ul,
+  ol {
+    margin: 2rem 0;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
 `;
 
 const SolutionButton = styled.a`
   font-weight: ${(p: { isActive: boolean }) =>
     p.isActive ? "bold" : "normal"};
   text-decoration: none;
-  padding-bottom: 1rem;
-  display: block;
 `;
 
 const FilterButton = styled.a`
   font-weight: ${(p: { isActive: boolean }) =>
     p.isActive ? "bold" : "normal"};
   text-decoration: none;
-  padding-bottom: 1rem;
-  display: inline-block;
 `;
 
 interface Solution {
@@ -36,7 +41,7 @@ interface Solution {
 const solutions: Solution[] = [
   {
     description:
-      "Laat items die niet passen naar de volgende regel lopen, ook als dat witruimtes veroorzaakt",
+      "Laat items die niet passen naar de volgende regel lopen (ook als dat witruimtes veroorzaakt)",
     Grid: GridA,
   },
   {
@@ -59,8 +64,48 @@ export default function App() {
     card.tags.some((tag) => !filter || tag === filter),
   );
 
+  const tagFilters = cards
+    .flatMap((card) => card.tags)
+    .reduce((result, tag) => {
+      return result.some((t) => t === tag) ? result : [...result, tag];
+    }, [] as Tag[]);
+
   return (
     <Container>
+      <p>
+        Een product-card is 1 kolom, een story 2. Wat doen we als een story in
+        de 3e kolom valt?
+      </p>
+
+      <h4>Opmerkingen:</h4>
+      <ul>
+        <li>
+          Om dit prototype te versimpelen wordt de breedte vast gezet op 800px.
+        </li>
+        <li>Het bekende 3d/tilt-effect zit hier nog niet in.</li>
+        <li>De content in de cards is fake.</li>
+        <li>
+          We maken gebruik van{" "}
+          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">
+            CSS Grid Layout
+          </a>
+          , geen 3rd party libs.
+        </li>
+        <li>
+          We gaan er vanuit dat er 1 array is, waar alle cards (products en
+          stories samen) in zitten. Filtering werkt obv een property in iedere
+          card. De filters worden ook opgebouwd adv deze property in de cards.
+        </li>
+        <li>
+          De source is hier te zien:{" "}
+          <a href="https://github.com/Jpunt/eneco-playground/tree/master/src/components">
+            https://github.com/Jpunt/eneco-playground/tree/master/src/components
+          </a>
+          .
+        </li>
+      </ul>
+
+      <h4>Mogelijke oplossingen:</h4>
       <ol>
         {solutions.map((solution, index) => (
           <li key={index}>
@@ -78,24 +123,24 @@ export default function App() {
         ))}
       </ol>
 
+      <h4>Filters:</h4>
       <ul>
-        {Object.keys(Tag).map((key) => {
-          const tag = Tag[key] as Tag;
+        {tagFilters.map((tagFilter) => {
           return (
-            <li key={key}>
+            <li key={tagFilter}>
               <FilterButton
                 href="#"
-                isActive={filter === tag}
+                isActive={filter === tagFilter}
                 onClick={(e) => {
                   e.preventDefault();
-                  if (filter === tag) {
+                  if (filter === tagFilter) {
                     setFilter(undefined);
                   } else {
-                    setFilter(tag);
+                    setFilter(tagFilter);
                   }
                 }}
               >
-                {tag}
+                {tagFilter}
               </FilterButton>
             </li>
           );

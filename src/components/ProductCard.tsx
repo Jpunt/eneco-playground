@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Product } from "./data";
+import cardAnimation from "./cardAnimation";
 
 const Container = styled.div`
   display: flex;
@@ -8,6 +9,7 @@ const Container = styled.div`
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  ${cardAnimation}
 `;
 
 const Image = styled.div`
@@ -45,7 +47,7 @@ interface Props {
 
 export default function ProductCard(props: Props) {
   return (
-    <Container className={props.className}>
+    <Container className={props.className} random={Math.random()}>
       <Image background={props.card.background} />
       <Titles>
         <Title>{props.card.title}</Title>
