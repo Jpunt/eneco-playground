@@ -9,7 +9,6 @@ const Container = styled.div`
   background: ${(p: { background: string }) => p.background};
   padding: 1.5rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  grid-column: 1 / 3;
 `;
 
 const Title = styled.h2`
@@ -24,7 +23,7 @@ interface Props {
 
 export default function StoryCard(props: Props) {
   return (
-    <Container background={props.card.background}>
+    <Container background={props.card.background} className={props.className}>
       <Title>{props.card.title}</Title>
     </Container>
   );

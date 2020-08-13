@@ -44,7 +44,7 @@ interface Props {
 
 export default function ProductCard(props: Props) {
   return (
-    <Container>
+    <Container className={props.className}>
       <Image background={props.card.background} />
       <Titles>
         <Title>{props.card.title}</Title>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+
 import GridA from "./GridA";
+import GridB from "./GridB";
 
 const Container = styled.div`
   font-family: Helvetica, sans-serif;
@@ -28,14 +30,13 @@ const options: Option[] = [
     grid: <GridA />,
   },
   {
-    description:
-      "Zet een story naar 1 kolom, als deze op de 3e positie uitkomt",
-    grid: "TODO",
+    description: "Zet een story naar 1 kolom als hij op de 3e positie uitkomt",
+    grid: <GridB />,
   },
 ];
 
 export default function App() {
-  const [optionIndex, setOptionIndex] = useState(0);
+  const [optionIndex, setOptionIndex] = useState(1);
   return (
     <Container>
       <ol>
