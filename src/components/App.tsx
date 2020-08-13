@@ -21,16 +21,9 @@ const Container = styled.div`
   }
 `;
 
-const SolutionButton = styled.a`
+const Button = styled.button`
   font-weight: ${(p: { isActive: boolean }) =>
     p.isActive ? "bold" : "normal"};
-  text-decoration: none;
-`;
-
-const FilterButton = styled.a`
-  font-weight: ${(p: { isActive: boolean }) =>
-    p.isActive ? "bold" : "normal"};
-  text-decoration: none;
 `;
 
 interface Solution {
@@ -66,9 +59,7 @@ export default function App() {
 
   const tagFilters = cards
     .flatMap((card) => card.tags)
-    .reduce((result, tag) => {
-      return result.some((t) => t === tag) ? result : [...result, tag];
-    }, [] as Tag[]);
+    .filter((tag, index, self) => self.indexOf(tag) === index);
 
   return (
     <Container>
@@ -109,16 +100,12 @@ export default function App() {
       <ol>
         {solutions.map((solution, index) => (
           <li key={index}>
-            <SolutionButton
-              onClick={(e) => {
-                e.preventDefault();
-                setSolutionIndex(index);
-              }}
+            <Button
+              onClick={() => setSolutionIndex(index)}
               isActive={solutionIndex === index}
-              href="#"
             >
               {solution.description}
-            </SolutionButton>
+            </Button>
           </li>
         ))}
       </ol>
@@ -128,11 +115,9 @@ export default function App() {
         {tagFilters.map((tagFilter) => {
           return (
             <li key={tagFilter}>
-              <FilterButton
-                href="#"
+              <Button
                 isActive={filter === tagFilter}
-                onClick={(e) => {
-                  e.preventDefault();
+                onClick={() => {
                   if (filter === tagFilter) {
                     setFilter(undefined);
                   } else {
@@ -141,7 +126,7 @@ export default function App() {
                 }}
               >
                 {tagFilter}
-              </FilterButton>
+              </Button>
             </li>
           );
         })}

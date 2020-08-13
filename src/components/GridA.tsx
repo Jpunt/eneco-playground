@@ -15,8 +15,6 @@ const StyledStoryCard = styled(StoryCard)`
   grid-column: span 2;
 `;
 
-const StyledProductCard = styled(ProductCard)``;
-
 interface Props {
   cards: Card[];
 }
@@ -27,7 +25,7 @@ export default function GridA(props: Props) {
       {props.cards.map((card) => {
         switch (card.type) {
           case "product":
-            return <StyledProductCard key={card.id} card={card} />;
+            return <ProductCard key={card.id} card={card} />;
           case "story":
             return <StyledStoryCard key={card.id} card={card} />;
         }
