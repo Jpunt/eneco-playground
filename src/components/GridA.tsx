@@ -20,12 +20,12 @@ const StyledProductCard = styled(ProductCard)``;
 export default function GridA() {
   return (
     <Container>
-      {cards.map((card, index) => {
+      {cards.map((card) => {
         switch (card.type) {
           case "product":
-            return <StyledProductCard key={index} card={card} />;
+            return <StyledProductCard key={card.id} card={card} />;
           case "story":
-            return <StyledStoryCard key={index} card={card} />;
+            return <StyledStoryCard key={card.id} card={card} />;
         }
       })}
     </Container>

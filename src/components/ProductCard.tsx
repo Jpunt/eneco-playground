@@ -21,6 +21,7 @@ const Titles = styled.div`
   flex-shrink: 0;
   background: white;
   padding: 1.5rem 1rem;
+  min-height: 4rem;
 `;
 
 const Title = styled.h2`

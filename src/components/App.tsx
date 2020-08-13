@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import GridA from "./GridA";
 import GridB from "./GridB";
+import GridC from "./GridC";
 
 const Container = styled.div`
   font-family: Helvetica, sans-serif;
@@ -30,13 +31,18 @@ const options: Option[] = [
     grid: <GridA />,
   },
   {
-    description: "Zet een story naar 1 kolom als hij op de 3e positie uitkomt",
+    description: "Zet een story naar 1 kolom als hij op de 3e kolom uitkomt",
     grid: <GridB />,
+  },
+  {
+    description:
+      "Wissel een story met een product als een story op de 3e kolom uitkomt",
+    grid: <GridC />,
   },
 ];
 
 export default function App() {
-  const [optionIndex, setOptionIndex] = useState(1);
+  const [optionIndex, setOptionIndex] = useState(2);
   return (
     <Container>
       <ol>

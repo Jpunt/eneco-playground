@@ -15,8 +15,6 @@ const StyledStoryCard = styled(StoryCard)`
   grid-column: ${(p: { columns: number }) => `span ${p.columns}`};
 `;
 
-const StyledProductCard = styled(ProductCard)``;
-
 type CardWithColumns = Card & { columns: number };
 
 export default function GridB() {
@@ -40,13 +38,17 @@ export default function GridB() {
 
   return (
     <Container>
-      {cardsWithColumns.map((card, index) => {
+      {cardsWithColumns.map((card) => {
         switch (card.type) {
           case "product":
-            return <StyledProductCard key={index} card={card} />;
+            return <ProductCard key={card.id} card={card} />;
           case "story":
             return (
-              <StyledStoryCard key={index} card={card} columns={card.columns} />
+              <StyledStoryCard
+                key={card.id}
+                card={card}
+                columns={card.columns}
+              />
             );
         }
       })}
