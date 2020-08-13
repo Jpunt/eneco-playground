@@ -20,16 +20,21 @@ interface Props {
 }
 
 export default function GridC(props: Props) {
-  // Haal de volgende card een stap terug, als er een story in
-  // de derde kolom zit en de volgende een product is:
   let used = 0;
-  const orderedCards = props.cards.reduce((result, card, index) => {
+  let isFlipped = false;
+  const cards = props.cards.reduce((result, card, index) => {
+    if (isFlipped) {
+      isFlipped = false;
+      return result;
+    }
+
     const columns = card.type === "story" ? 2 : 1;
     const isThird = (used + 1) % 3 === 0;
     const nextCard = props.cards[index + 1];
 
     if (isThird && card.type === "story" && nextCard?.type === "product") {
       used += columns;
+      isFlipped = true;
       return [...result, nextCard, card];
     } else {
       used += columns;
@@ -37,15 +42,9 @@ export default function GridC(props: Props) {
     }
   }, [] as Card[]);
 
-  // Filter dubbele cards weer weg
-  const processedCards = orderedCards.filter((card, index) => {
-    const cardsBefore = orderedCards.slice(0, index);
-    return !cardsBefore.some((c) => c.id === card.id);
-  });
-
   return (
     <Container>
-      {processedCards.map((card) => {
+      {cards.map((card) => {
         switch (card.type) {
           case "product":
             return <ProductCard key={card.id} card={card} />;
